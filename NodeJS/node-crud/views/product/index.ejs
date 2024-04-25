@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/products/create">Create Products</a></h3>
+      <h1>Products List</h1>
+      <% if(products.length>0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Products Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<products.length;i++) { %>
+            <tr>
+              <td><a href="/products/show/<%= products[i]._id%>"><%= products[i].name%></a></td>
+              <td><%= products[i].description%></td>
+              <td>$<%= products[i].price%></td>
+              <td> 
+                <h3><a href="/products/edit/<%= products[i]._id%>">EDIT</a></h3>
+              </td>
+              <td>
+                <form action="/products/delete/<%= products[i]._id%>" method="post">
+                    <button type="submit">DELETE</button>
+                </form>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No products found.</div>
+      <% } %>
+    </div>
+  </body>
+</html>
